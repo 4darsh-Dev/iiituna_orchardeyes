@@ -1,1 +1,4 @@
 myenv/
+weights/
+server.log
+*.log
