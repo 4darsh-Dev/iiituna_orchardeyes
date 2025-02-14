@@ -80,7 +80,6 @@ function AppContent() {
         isAuthenticated={isAuthenticated}
       />
       <div className='sm:mt-20'>
-        <GoogleTranslate />
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/ownerPage' element={<ProfilePage />} />
