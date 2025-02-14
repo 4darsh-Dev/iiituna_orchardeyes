@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify, send_file
 from auth import generate_token, token_required
-from ai.server.utils.utils import log_request_info, allowed_file
-from ai.models.image_processing.yolo_detections.plant_part_detect import get_predictions_with_annotations
+from utils.utils import log_request_info, allowed_file
+
 import io
-from ai.models.image_processing.ocr_tesseract import SoilHealthOCR
+from models.image_processing.ocr_tesseract import SoilHealthOCR
+from models.image_processing.yolo_detection.plant_part_detect import get_predictions_with_annotations
 app = Flask(__name__)
 
 # Health Check
