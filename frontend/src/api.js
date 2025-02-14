@@ -16,3 +16,13 @@ export const getUser = async (email) => {
   )
   return userData.json()
 }
+export const getImagePrediction = async (formdata) => {
+  const response = await fetch(
+    `${VITE_BACKEND_URL}/predict/part-classification`,
+    {
+      method: 'POST',
+      body: formdata
+    }
+  )
+  return response.json()
+}

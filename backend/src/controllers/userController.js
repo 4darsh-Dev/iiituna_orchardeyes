@@ -1,4 +1,4 @@
-import { prisma } from '../utils/prismaClient'
+import { prisma } from '../utils/prismaClient.js'
 
 export const createUser = async (req, res) => {
   const { name, email } = req.body
