@@ -1,6 +1,8 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
+import userRoutes from './src/routes/user.js'
+import imagePredictionRoutes from './src/routes/imagePrediction.js'
 
 dotenv.config()
 
@@ -14,6 +16,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.use('/user', userRoutes)
+app.use('/predict', imagePredictionRoutes)
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
 })

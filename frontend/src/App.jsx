@@ -18,6 +18,7 @@ import Analysis from './components/Analysis'
 import Learn from './components/Learn'
 import { createUser, getUser } from './api'
 import { GoogleTranslate } from './components/Translate'
+import ImageUpload from './components/ImageUpload'
 
 function App() {
   return <AppContent />
@@ -106,6 +107,7 @@ function AppContent() {
               }
             />
             <Route path='drone' element={<ConnectDrone />} />
+            <Route path='image-upload' element={<ImageUpload />} />
           </Route>
           <Route path='/chatbot' element={<Chatbot />} />
           <Route path='/models-report' element={<ModelsReport />} />

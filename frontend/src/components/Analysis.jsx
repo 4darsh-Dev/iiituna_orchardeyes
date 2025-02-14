@@ -7,10 +7,13 @@ import PieChart from './charts/PieChart'
 import leafForChart from '../assets/img/leaf_for_chart.svg'
 import appleForChart from '../assets/img/apple_for_chart.png'
 import sunCloud from '../assets/img/sun_cloud.svg'
-import PrecisionMap from './charts/PrecisonMap'
+import PrecisionMap from './charts/PrecisionMap'
 
 const Analysis = () => {
+  const [currentSlide, setCurrentSlide] = useState(0)
   const [farmMetrics, setFarmMetrics] = useState(null)
+  const [slideAnimation, setSlideAnimation] = useState('')
+
   const data = {
     health: {
       fruit: {
@@ -77,125 +80,165 @@ const Analysis = () => {
     }
   }
 
+  const slides = [
+    {
+      title: 'Leaves and Fruits',
+      component: ({ data }) => (
+        <div className='flex flex-col gap-6 w-full'>
+          <div className='flex gap-4 justify-around'>
+            <div className='flex flex-col items-center gap-4'>
+              <DoughnutChartWithImage
+                img={leafForChart}
+                label1='Healthy leaves'
+                label2='Diseased Leaves'
+                data1={data.health.leaves.healthy}
+                data2={data.health.leaves.unhealthy}
+              />
+              <Card bgColor='bg-emerald-50' margin='mt-4'>
+                <div className='text-center'>
+                  <p className='font-semibold text-lg text-emerald-700'>
+                    {data.health.leaves.healthy}% Healthy
+                  </p>
+                  <p className='text-red-600'>
+                    {data.health.leaves.unhealthy}% Diseased
+                  </p>
+                </div>
+              </Card>
+            </div>
+            <div className='flex flex-col items-center gap-4'>
+              <DoughnutChartWithImage
+                img={appleForChart}
+                label1='Healthy Apples'
+                label2='Diseased Apples'
+                data1={data.health.fruit.healthy}
+                data2={data.health.fruit.unhealthy}
+              />
+              <Card bgColor='bg-emerald-50' margin='mt-4'>
+                <div className='text-center'>
+                  <p className='font-semibold text-lg text-emerald-700'>
+                    {data.health.fruit.healthy}% Healthy
+                  </p>
+                  <p className='text-red-600'>
+                    {data.health.fruit.unhealthy}% Diseased
+                  </p>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: 'Disease Prediction',
+      component: ({ data }) => (
+        <div className='flex flex-col gap-6 w-full'>
+          <PieChart
+            dataSet={data.predictedDiseases.chance}
+            labels={data.predictedDiseases.disease}
+          />
+          <div className='grid grid-cols-3 gap-4'>
+            {data.predictedDiseases.disease.map((disease, index) => (
+              <Card key={disease} bgColor='bg-orange-50'>
+                <div className='text-center'>
+                  <p className='font-semibold'>{disease}</p>
+                  <p className='text-lg text-orange-700'>
+                    {data.predictedDiseases.chance[index]}%
+                  </p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )
+    },
+    {
+      title: 'Production',
+      component: ({ data }) => (
+        <div className='flex flex-col gap-6 w-full'>
+          <LineChart
+            labels={[0, 15, 30, 45, 60, 75]}
+            data={farmMetrics.estimatedAppleYield}
+            title='Estimated Apple Count (tonnes)'
+          />
+          <div className='grid grid-cols-3 gap-4'>
+            {data.predictedDiseases.disease.map((disease, index) => (
+              <Card key={disease} bgColor='bg-orange-50'>
+                <div className='text-center'>
+                  <p className='font-semibold'>{disease}</p>
+                  <p className='text-lg text-orange-700'>
+                    {data.predictedDiseases.chance[index]}%
+                  </p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )
+    },
+    {
+      title: 'Precision Map',
+      component: ({ data }) => (
+        <div className='w-full'>
+          <Card bgColor='bg-blue-50'>
+            <PrecisionMap
+              data={data.precisionMapData}
+              title='2D Precision Map'
+            />
+          </Card>
+        </div>
+      )
+    }
+  ]
+
   useEffect(() => {
     setFarmMetrics(data)
   }, [])
-  // Destructure farmMetrics
-  const {
-    health: {
-      fruit: { healthy: healthyFruits, unhealthy: unhealthyFruits } = {},
-      leaves: { healthy: healthyLeaves, unhealthy: unhealthyLeaves } = {}
-    } = {},
-    weather: { temperature, humidity, prediction } = {},
-    pestSeverity,
-    predictedDiseases: { disease, chance } = {},
-    appleCount,
-    production
-  } = farmMetrics || {}
+
+  const handleSlideChange = (direction) => {
+    setSlideAnimation(direction === 'next' ? 'slide-left' : 'slide-right')
+
+    setTimeout(() => {
+      setCurrentSlide((prev) => {
+        if (direction === 'next') {
+          return prev === slides.length - 1 ? 0 : prev + 1
+        } else {
+          return prev === 0 ? slides.length - 1 : prev - 1
+        }
+      })
+      setSlideAnimation('')
+    }, 300)
+  }
+
   return (
-    <div className='flex  bg-white p-4 sm:pl-48 flex flex-col gap-6 bg-[#dedede]'>
+    <div className='flex bg-white p-4 sm:pl-48 flex-col gap-6 bg-[#dedede] min-h-screen'>
       {farmMetrics ? (
-        <>
-          <div className='flex gap-4 items-center justify-center'>
-            <div className=''>
-              <div className='flex justify-between items-center'>
-                <ChevronLeft />
-                <h2 className='font-semibold text-lg text-[#7d7d7d]'>
-                  Leaves and Fruits
-                </h2>
-                <ChevronRight />
-              </div>
-              <div className='flex gap-4'>
-                <div className='flex flex-col space-x-4 gap-3'>
-                  <DoughnutChartWithImage
-                    img={leafForChart}
-                    label1='Healthy leaves'
-                    label2='Diseased Leaves'
-                    data1={healthyLeaves}
-                    data2={unhealthyLeaves}
-                  />
-                  <div className='mt-2 flex gap-3'>
-                    <div className='flex items-center'>
-                      <span className='w-3 h-3 bg-teal-500 rounded-full mr-2'></span>
-                      <span className='text-sm'>Healthy Leaves</span>
-                    </div>
-                    <div className='flex items-center'>
-                      <span className='w-3 h-3 bg-red-500 rounded-full mr-2'></span>
-                      <span className='text-sm'>Leaves with disease</span>
-                    </div>
-                  </div>
-                </div>
-                {/* <div className='flex flex-col space-x-4'>
-                  <DoughnutChartWithImage
-                    img={appleForChart}
-                    label1='Healthy Apples'
-                    label2='Diseased Apples'
-                    data1={healthyFruits}
-                    data2={unhealthyFruits}
-                  />
-                  <div className='mt-2 flex flex-col'>
-                    <div className='flex items-center'>
-                      <span className='w-3 h-3 bg-teal-500 rounded-full mr-2'></span>
-                      <span className='text-sm'>Healthy Apples</span>
-                    </div>
-                    <div className='flex items-center'>
-                      <span className='w-3 h-3 bg-red-500 rounded-full mr-2'></span>
-                      <span className='text-sm'>Apples with disease</span>
-                    </div>
-                  </div>
-                </div> */}
-              </div>
-            </div>
-
-            {/* <Card
-              className='p-4 col-span-2 '
-              bgColor={'bg-[#B7F1B7]'}
-              otherStyles={'border border-[#48bc48]'}
+        <div className='relative w-full'>
+          <div className='flex justify-between items-center mb-6'>
+            <button
+              onClick={() => handleSlideChange('prev')}
+              className='p-2 hover:bg-gray-100 rounded-full transition-colors'
             >
-              <h2 className='font-semibold mb-2 w-[25vw]'>Overall</h2>
-              <div className='text-lg'>
-                <span>Esitimated Yield :</span>
-                <span> 87 Tonnes</span>
-              </div>
-              <div className='text-lg'>
-                <span>Pest Outbreak : </span>
-                <span> Codling Moth</span>
-              </div>
-            </Card> */}
+              <ChevronLeft className='w-6 h-6 text-gray-600' />
+            </button>
+            <h2 className='font-semibold text-xl text-gray-600'>
+              {slides[currentSlide].title}
+            </h2>
+            <button
+              onClick={() => handleSlideChange('next')}
+              className='p-2 hover:bg-gray-100 rounded-full transition-colors'
+            >
+              <ChevronRight className='w-6 h-6 text-gray-600' />
+            </button>
           </div>
-          {/* <div className='flex gap-4 items-start'>
-            <Card className='p-4 bg-yellow-50' bgColor={'bg-[#EDF9DA]'}>
-              <div className='flex justify-between items-center'>
-                <h2 className='font-semibold'>Pests and Diseases</h2>
-                <ChevronDown />
-              </div>
-              <div className='mt-2 bg-yellow-200 rounded-full h-2'></div>
-            </Card>
 
-            <Card className='p-4' bgColor={'bg-white'}>
-              <div className='flex justify-between items-center mb-2'>
-                <h2 className='font-semibold'>Production</h2>
-              </div>
-
-              <LineChart
-                labels={[0, 15, 30, 45, 60, 75]}
-                data={farmMetrics.estimatedAppleYield}
-                title='Estimated Apple Count (tonnes)'
-              />
-            </Card>
-            <Card bgColor={'bg-[#FAEBEB]'}>
-              <PieChart dataSet={chance} labels={disease} />
-            </Card>
-            <Card bgColor={'bg-[#FAEBEB]'}>
-        <PrecisionMap
-          data={farmMetrics.precisionMapData}
-          title='2D Precision Map'
-        />
-      </Card>
-          </div> */}
-        </>
+          <div className={`transition-all duration-300 ${slideAnimation}`}>
+            {slides[currentSlide].component({ data: farmMetrics })}
+          </div>
+        </div>
       ) : (
-        <div>Loading...</div>
+        <div className='flex items-center justify-center h-64'>
+          <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900'></div>
+        </div>
       )}
     </div>
   )
