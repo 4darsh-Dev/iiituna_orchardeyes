@@ -46,7 +46,8 @@ const QuickActions = ({ activeTab, setActiveTab }) => {
       icon: <Bug size={40} />,
       label: 'Disease Detection',
       color: 'bg-red-100',
-      iconColor: 'text-red-600'
+      iconColor: 'text-red-600',
+      route: '/farm-management/image-upload'
     },
     {
       icon: <Droplets size={40} />,

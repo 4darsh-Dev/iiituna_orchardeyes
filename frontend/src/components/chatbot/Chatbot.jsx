@@ -4,7 +4,7 @@ import VoiceInput from './VoiceInput'
 import ChatBotImg from '../../assets/img/chatbot-img.png'
 import { getPrediction } from '../../utils/gradioConfig'
 import { SyncLoader } from 'react-spinners'
-import { Mic, MicOff, Send } from 'lucide-react'
+import { Mic, MicOff, Send, X } from 'lucide-react'
 const Main = styled.div.withConfig({
   shouldForwardProp: (prop) => !['isOpened'].includes(prop)
 })`
@@ -208,7 +208,7 @@ const Chatbot = () => {
         {!isOpened ? (
           <img src={ChatBotImg} alt='chatbot' className='h-12' />
         ) : (
-          <i className='fa-solid fa-x text-lg text-white'></i>
+          <X size={30} color='#fff' />
         )}
       </div>
     </>

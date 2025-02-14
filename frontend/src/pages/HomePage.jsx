@@ -6,11 +6,11 @@ import Testimonials from '../components/Testimonials'
 
 const HomePage = () => {
   return (
-    <div>
-      <HeroSection/>
-      <Features/>
-      <HowItWorks/>
-      <Testimonials/>
+    <div className='sm:hidden'>
+      <HeroSection />
+      <Features />
+      <HowItWorks />
+      <Testimonials />
     </div>
   )
 }

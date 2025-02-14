@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import PreferedOrchs from '../components/PreferredOrchs'
 import FooterSection from '../components/FooterSection'
 import Chatbot from '../components/chatbot/Chatbot'
+import HomePage from './HomePage'
 const GlobalStyle = createGlobalStyle`
   * {
     /* Add your global styles here */
@@ -51,11 +52,11 @@ const LandingPage = () => {
   return (
     <>
       <GlobalStyle />
-      <MainContainer>
+      <MainContainer className='hidden sm:block'>
         <WelcomeContainer>
           <WelcomeImage src={landingPageBackground} />
           <WelcomeText>
-            <h1 className='font-ex-large'>
+            <h1 className='text-3xl'>
               A <span className='text-highlight font-bold'>DRONE</span> POWERED
               SOLUTION FOR <span className='text-red-700'></span> ORCHARDS
             </h1>
@@ -70,6 +71,7 @@ const LandingPage = () => {
           <span>password - test@123</span>
         </div>
       </MainContainer>
+      <HomePage />
     </>
   )
 }

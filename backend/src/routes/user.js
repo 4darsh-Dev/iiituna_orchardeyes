@@ -1,10 +1,10 @@
-const express = require('express')
-const { body, validationResult } = require('express-validator')
-const {
+import express from 'express'
+import { body, validationResult } from 'express-validator'
+import {
   createUser,
   editUser,
   fetchUser
-} = require('../controllers/userController')
+} from '../controllers/userController.js'
 
 const router = express.Router()
 
@@ -15,3 +15,4 @@ router.post(
 )
 router.post('/edit-user', editUser)
 router.get('/fetch-user', fetchUser)
+export default router
