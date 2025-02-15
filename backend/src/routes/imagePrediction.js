@@ -6,6 +6,6 @@ const upload = multer({ storage: multer.memoryStorage() })
 
 const router = express.Router()
 
-router.post('/part-classification', upload.single('image'), partsClassification)
+router.post('/part-classification', upload.single('file'), partsClassification)
 
 export default router

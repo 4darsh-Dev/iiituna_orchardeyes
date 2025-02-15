@@ -74,9 +74,14 @@ const ImageUpload = ({ onImageUpload, maxSizeMB = 5 }) => {
     try {
       console.log('Uploading image')
       const formData = new FormData()
-      formData.append('image', file)
-      const prediction = await getImagePrediction(formData)
-      console.log(prediction, 'prediction')
+      if(file){
+        formData.append('file', file)
+        console.log(formData, 'formData')
+        const prediction = await getImagePrediction(formData)
+        console.log(prediction, 'prediction')
+      }else{
+        console.log('No file uploaded')
+      }
     } catch (error) {
       console.error('Failed to upload image:', error)
     }

@@ -1,20 +1,22 @@
-from ultralytics import YOLO
-import cv2
+
+
+import gradio as gr
 import numpy as np
+import cv2
 from PIL import Image
 import io
+from ultralytics import YOLO
 
-# Load YOLO model (ensure path is correct)
-model = YOLO('')
+# Load YOLO model
+model = YOLO('/home/kalie/work/projects/OrchardEyes/experiments/models/tree-organ-best-model.pt')
 
 # Class names
-class_names = ["tree"]
+class_names = ["branch", "flower", "leaf-cluster", "fruit"]
 
-def predict(image_bytes):
-    # Convert bytes to PIL Image
-    image = Image.open(io.BytesIO(image_bytes))
+def predict(image):
+    # Convert PIL image to numpy array
     image_np = np.array(image)
-
+    
     # Run YOLO prediction
     results = model(image_np)
     return results, image_np
@@ -31,17 +33,16 @@ def draw_boxes(image, results):
 
             cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
             cv2.putText(image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
-
+    
     return image
 
-def get_tree_detection(image_bytes):
-    results, original_image = predict(image_bytes)
+def process_image(image):
+    results, original_image = predict(image)
     annotated_image = draw_boxes(original_image.copy(), results)
-
-    # Convert annotated image to bytes
-    _, buffer = cv2.imencode('.jpg', annotated_image)
-    annotated_image_bytes = buffer.tobytes()
-
+    
+    # Convert numpy image to PIL image
+    annotated_pil = Image.fromarray(annotated_image)
+    
     # Prepare prediction details
     prediction_details = []
     for result in results:
@@ -53,9 +54,20 @@ def get_tree_detection(image_bytes):
             x1, y1, x2, y2 = box
             label = class_names[cls]
             prediction_details.append({
-                "class": label,
-                "confidence": float(conf),
-                "bounding_box": [x1, y1, x2, y2]
+                "Class": label,
+                "Confidence": round(float(conf), 2),
+                "Bounding Box": [x1, y1, x2, y2]
             })
+    
+    return annotated_pil, prediction_details
 
-    return prediction_details, annotated_image_bytes
+# Gradio interface
+demo = gr.Interface(
+    fn=process_image,
+    inputs=gr.Image(type="pil"),
+    outputs=[gr.Image(type="pil"), gr.JSON()],
+    title="YOLOv8 Plant Part Detection",
+    description="Upload an image, and the model will detect and classify plant parts with bounding boxes."
+)
+
+demo.launch()
