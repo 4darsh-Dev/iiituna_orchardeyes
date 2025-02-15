@@ -52,7 +52,7 @@ const LandingPage = () => {
   return (
     <>
       <GlobalStyle />
-      <MainContainer className='hidden '>
+      <MainContainer className='hidden sm:block'>
         <WelcomeContainer>
           <WelcomeImage src={landingPageBackground} />
           <WelcomeText>

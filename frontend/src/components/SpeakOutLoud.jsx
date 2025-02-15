@@ -1,7 +1,7 @@
 import { Volume, Volume2 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
-const ChatSpeak = ({ message }) => {
+const SpeakOutLoud = ({ message }) => {
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [selectedVoice, setSelectedVoice] = useState(null)
 
@@ -18,8 +18,7 @@ const ChatSpeak = ({ message }) => {
       const preferredVoice =
         voices.find(
           (v) =>
-            v.name.includes('Google US English') ||
-            v.name.includes('Google Hindi')
+            v.name.includes('Google Hindi') || v.name.includes('Google हिन्दी')
         ) || voices[0] // Default to the first available voice if none match
 
       setSelectedVoice(preferredVoice)
@@ -55,4 +54,4 @@ const ChatSpeak = ({ message }) => {
   )
 }
 
-export default ChatSpeak
+export default SpeakOutLoud

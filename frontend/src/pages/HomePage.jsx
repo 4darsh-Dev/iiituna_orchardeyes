@@ -6,7 +6,7 @@ import Testimonials from '../components/Testimonials'
 
 const HomePage = () => {
   return (
-    <div className=''>
+    <div className='sm:hidden'>
       <HeroSection />
       <Features />
       <HowItWorks />

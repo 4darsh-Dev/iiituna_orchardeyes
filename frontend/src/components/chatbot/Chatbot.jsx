@@ -5,7 +5,7 @@ import ChatBotImg from '../../assets/img/chatbot-img.png'
 import { getPrediction } from '../../utils/gradioConfig'
 import { SyncLoader } from 'react-spinners'
 import { Mic, MicOff, Send, X } from 'lucide-react'
-import ChatSpeak from '../chatSpeak'
+import ChatSpeak from '../SpeakOutLoud'
 const Main = styled.div.withConfig({
   shouldForwardProp: (prop) => !['isOpened'].includes(prop)
 })`

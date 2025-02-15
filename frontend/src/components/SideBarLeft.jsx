@@ -15,13 +15,15 @@ const SidebarLeft = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate()
   return (
     <div
-      className={`fixed bottom-0 sm:top-0 left-0 h-auto sm:h-screen w-screen sm:w-48 sm:bg-[#ffffff] rounded-r-2xl z-50 text-gray-700 p-3 transition-transform duration-300 ease-in-out sm:border sm:border-[#e3e1e1] sm:pt-[15vh] sm:shadow`}
+      className={`fixed bottom-0 sm:top-0 left-0 h-auto sm:h-screen w-screen sm:w-48 sm:bg-[#ffffff] rounded-r-2xl z-50 text-gray-700 p-3 transition-transform duration-300 ease-in-out sm:border sm:border-[#e3e1e1] sm:pt-[15vh] sm:shadow z-[1000]`}
     >
       <nav className='flex-grow'>
         <ul className='flex flex-row sm:flex-col sm:items-start items-center justify-around border shadow sm:shadow-none sm:border-none rounded-xl bg-white mx-4 sm:mx-1 py-1'>
           <li className='flex items-center'>
             <span
-              onClick={() => {}}
+              onClick={() => {
+                navigate('/farm-management/home')
+              }}
               className={`flex items-center p-2 rounded-md ${activeTab === 'Home' ? 'bg-green-200' : ''} sm:gap-2`}
             >
               <Home size={22} />

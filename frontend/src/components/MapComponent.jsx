@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 // import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 // import MarkerClusterGroup from 'react-leaflet-cluster'
-// import { Search, Filter, Bug, Virus } from 'lucide-react'
+// import { Search, Filter, Bug } from 'lucide-react'
 // import 'leaflet/dist/leaflet.css'
 // import L from 'leaflet'
 
@@ -42,7 +42,7 @@
 // const getOutbreakIcon = (type, severity) => {
 //   const color =
 //     severity === 'high' ? 'red' : severity === 'medium' ? 'yellow' : 'orange'
-//   const icon = type === 'pest' ? Bug : Virus
+//   const icon = type === 'pest' ? Bug : Bug
 
 //   return L.divIcon({
 //     html: `
@@ -62,65 +62,65 @@
 // }
 
 // // Map Controls Component
-// const MapControls = ({ onSearch, onFilter, onThemeToggle }) => {
-//   return (
-//     <div className='absolute top-4 left-4 z-[1000] space-y-2'>
-//       <div className='bg-white rounded-lg shadow-lg p-2'>
-//         <div className='flex items-center space-x-2'>
-//           <input
-//             type='text'
-//             placeholder='Search location...'
-//             className='px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-//             onChange={(e) => onSearch(e.target.value)}
-//           />
-//           <button
-//             className='p-2 bg-gray-100 rounded-lg hover:bg-gray-200'
-//             onClick={() => onFilter()}
-//           >
-//             <Filter className='w-5 h-5' />
-//           </button>
-//         </div>
-//       </div>
+// // const MapControls = ({ onSearch, onFilter, onThemeToggle }) => {
+// //   return (
+// //     <div className='absolute top-4 left-4 z-[1000] space-y-2'>
+// //       {/* <div className='bg-white rounded-lg shadow-lg p-2'>
+// //         <div className='flex items-center space-x-2'>
+// //           <input
+// //             type='text'
+// //             placeholder='Search location...'
+// //             className='px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+// //             onChange={(e) => onSearch(e.target.value)}
+// //           />
+// //           <button
+// //             className='p-2 bg-gray-100 rounded-lg hover:bg-gray-200'
+// //             onClick={() => onFilter()}
+// //           >
+// //             <Filter className='w-5 h-5' />
+// //           </button>
+// //         </div>
+// //       </div> */}
 
-//       <div className='bg-white rounded-lg shadow-lg p-2'>
-//         <select
-//           className='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-//           onChange={(e) =>
-//             onFilter({ type: 'severity', value: e.target.value })
-//           }
-//         >
-//           <option value=''>All Severities</option>
-//           <option value='high'>High</option>
-//           <option value='medium'>Medium</option>
-//           <option value='low'>Low</option>
-//         </select>
-//       </div>
-//     </div>
-//   )
-// }
+// //       <div className='bg-white rounded-lg shadow-lg p-2'>
+// //         <select
+// //           className='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+// //           onChange={(e) =>
+// //             onFilter({ type: 'severity', value: e.target.value })
+// //           }
+// //         >
+// //           <option value=''>All Severities</option>
+// //           <option value='high'>High</option>
+// //           <option value='medium'>Medium</option>
+// //           <option value='low'>Low</option>
+// //         </select>
+// //       </div>
+// //     </div>
+// //   )
+// // }
 
 // // Legend Component
-// const Legend = () => {
-//   return (
-//     <div className='absolute bottom-4 right-4 z-[1000] bg-white rounded-lg shadow-lg p-4'>
-//       <h3 className='font-semibold mb-2'>Legend</h3>
-//       <div className='space-y-2'>
-//         <div className='flex items-center space-x-2'>
-//           <div className='w-4 h-4 rounded-full bg-red-500' />
-//           <span>High Severity</span>
-//         </div>
-//         <div className='flex items-center space-x-2'>
-//           <div className='w-4 h-4 rounded-full bg-yellow-500' />
-//           <span>Medium Severity</span>
-//         </div>
-//         <div className='flex items-center space-x-2'>
-//           <div className='w-4 h-4 rounded-full bg-orange-500' />
-//           <span>Low Severity</span>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
+// // const Legend = () => {
+// //   return (
+// //     <div className='absolute bottom-4 right-4 z-[1000] bg-white rounded-lg shadow-lg p-4'>
+// //       <h3 className='font-semibold mb-2'>Legend</h3>
+// //       <div className='space-y-2'>
+// //         <div className='flex items-center space-x-2'>
+// //           <div className='w-4 h-4 rounded-full bg-red-500' />
+// //           <span>High Severity</span>
+// //         </div>
+// //         <div className='flex items-center space-x-2'>
+// //           <div className='w-4 h-4 rounded-full bg-yellow-500' />
+// //           <span>Medium Severity</span>
+// //         </div>
+// //         <div className='flex items-center space-x-2'>
+// //           <div className='w-4 h-4 rounded-full bg-orange-500' />
+// //           <span>Low Severity</span>
+// //         </div>
+// //       </div>
+// //     </div>
+// //   )
+// // }
 
 // const MapComponent = () => {
 //   const [theme, setTheme] = useState('light')
@@ -153,12 +153,12 @@
 
 //   return (
 //     <div className='relative h-[calc(100vh-4rem)]'>
-//       <MapControls
+//       {/* <MapControls
 //         onSearch={handleSearch}
 //         onFilter={handleFilter}
 //         onThemeToggle={toggleTheme}
-//       />
-//       <Legend />
+//       /> */}
+//       {/* <Legend /> */}
 //       <MapContainer center={center} zoom={zoom} className='h-full w-full'>
 //         <TileLayer url={tileLayerUrl} />
 //         <MarkerClusterGroup>

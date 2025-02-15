@@ -22,6 +22,7 @@ import ImageUpload from './components/ImageUpload'
 import About from './pages/AboutPage'
 import ContactUsPage from './pages/ContactUsPage'
 import ExpandedWeatherCard from './components/ExpandedWeatherCard'
+import MapComponent from './components/MapComponent'
 
 function App() {
   return <AppContent />
@@ -126,6 +127,7 @@ function AppContent() {
             />
             <Route path='drone' element={<ConnectDrone />} />
             <Route path='image-upload' element={<ImageUpload />} />
+            <Route path='home' element={<MapComponent />} />
           </Route>
           <Route path='/chatbot' element={<Chatbot />} />
           <Route path='/models-report' element={<ModelsReport />} />
