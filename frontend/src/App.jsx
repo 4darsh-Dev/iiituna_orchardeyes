@@ -20,6 +20,7 @@ import { createUser, getUser } from './api'
 import { GoogleTranslate } from './components/Translate'
 import ImageUpload from './components/ImageUpload'
 import About from './pages/AboutPage'
+import ContactUsPage from './pages/ContactUsPage'
 import ExpandedWeatherCard from './components/ExpandedWeatherCard'
 
 function App() {
@@ -135,6 +136,7 @@ function AppContent() {
             element={<ProfilePage userData={userData} />}
           />
           <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<ContactUsPage />} />
         </Routes>
       </div>
     </>
