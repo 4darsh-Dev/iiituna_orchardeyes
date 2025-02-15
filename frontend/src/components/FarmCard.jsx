@@ -231,7 +231,12 @@ const FarmDashboard = () => {
           otherStyles={'border border-[#71c9bd]'}
           margin={'0'}
         >
-          <div className='flex items-center justify-between gap-4'>
+          <div
+            className='flex items-center justify-between gap-4'
+            onClick={() => {
+              navigate('/farm-management/weather')
+            }}
+          >
             <div className='flex items-center'>
               <img src={sunCloud} alt='sun behing clouds' />
             </div>

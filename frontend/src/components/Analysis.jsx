@@ -9,8 +9,7 @@ import appleForChart from '../assets/img/apple_for_chart.png'
 import sunCloud from '../assets/img/sun_cloud.svg'
 import PrecisionMap from './charts/PrecisionMap'
 
-const Analysis = () => {
-  const [currentSlide, setCurrentSlide] = useState(0)
+const Analysis = ({ currentAnalysisSlide, setCurrentAnalysisSlide }) => {
   const [farmMetrics, setFarmMetrics] = useState(null)
   const [slideAnimation, setSlideAnimation] = useState('')
 
@@ -198,7 +197,7 @@ const Analysis = () => {
     setSlideAnimation(direction === 'next' ? 'slide-left' : 'slide-right')
 
     setTimeout(() => {
-      setCurrentSlide((prev) => {
+      setCurrentAnalysisSlide((prev) => {
         if (direction === 'next') {
           return prev === slides.length - 1 ? 0 : prev + 1
         } else {
@@ -221,7 +220,7 @@ const Analysis = () => {
               <ChevronLeft className='w-6 h-6 text-gray-600' />
             </button>
             <h2 className='font-semibold text-xl text-gray-600'>
-              {slides[currentSlide].title}
+              {slides[currentAnalysisSlide].title}
             </h2>
             <button
               onClick={() => handleSlideChange('next')}
@@ -232,7 +231,7 @@ const Analysis = () => {
           </div>
 
           <div className={`transition-all duration-300 ${slideAnimation}`}>
-            {slides[currentSlide].component({ data: farmMetrics })}
+            {slides[currentAnalysisSlide].component({ data: farmMetrics })}
           </div>
         </div>
       ) : (

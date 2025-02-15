@@ -22,11 +22,13 @@ export const editUser = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 }
-export const fetchUser = async (req, res) => {
+export const getUser = async (req, res) => {
+  console.log('req received')
   try {
-    const { email } = req.params
-    const users = await prisma.user.findUnique({ where: { email } })
-    res.status(200).json(users)
+    const { email } = req.query
+    const user = await prisma.user.findUnique({ where: { email } })
+    console.log(user)
+    res.status(200).json(user)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

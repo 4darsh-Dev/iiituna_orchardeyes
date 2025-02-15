@@ -107,6 +107,12 @@ const OrchardManagement = ({ activeTab, setActiveTab }) => {
       case '/drone':
         setActiveTab('My Drone')
         break
+      case '/image-upload':
+        setActiveTab('Upload Image')
+        break
+      case '/home':
+        setActiveTab('Home')
+        break
       default:
         setActiveTab('Dashboard')
         break

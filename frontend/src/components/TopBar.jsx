@@ -33,7 +33,12 @@ const TopBar = ({ activeTab }) => {
             </div>
 
             <div className='flex items-center'>
-              <button className='p-1 text-gray-600 hover:text-gray-900 rounded-full bg-gray-100 hover:bg-gray-200'>
+              <button
+                className='p-1 text-gray-600 hover:text-gray-900 rounded-full bg-gray-100 hover:bg-gray-200'
+                onClick={() => {
+                  navigate('/profile')
+                }}
+              >
                 {user ? (
                   user.img ? (
                     <img

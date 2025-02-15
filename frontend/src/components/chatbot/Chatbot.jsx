@@ -5,6 +5,7 @@ import ChatBotImg from '../../assets/img/chatbot-img.png'
 import { getPrediction } from '../../utils/gradioConfig'
 import { SyncLoader } from 'react-spinners'
 import { Mic, MicOff, Send, X } from 'lucide-react'
+import ChatSpeak from '../SpeakOutLoud'
 const Main = styled.div.withConfig({
   shouldForwardProp: (prop) => !['isOpened'].includes(prop)
 })`
@@ -152,9 +153,10 @@ const Chatbot = () => {
         >
           <MessagesContainer className='custom-scrollbar text-sm absolute top-0 w-full'>
             {messages.map((msg, index) => (
-              <Message key={index} sender={msg.sender}>
-                {msg.text}
-              </Message>
+              <div key={index}>
+                <Message sender={msg.sender}>{msg.text}</Message>
+                <ChatSpeak message={msg.text} />
+              </div>
             ))}
             <Message sender='bot'>
               <SyncLoader
