@@ -4,7 +4,7 @@ import { Routes, useLocation, Route, useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import Navbar from './components/Navbar'
 import LandingPage from './pages/LandingPage'
-import ProfilePage from './components/OwnerPage'
+import ProfilePage from './pages/ProfilePage'
 
 import OrchardManagement from './pages/FarmManagement'
 import ModelsReport from './pages/ModelsReport'
@@ -17,8 +17,10 @@ import QuickActions from './pages/QuickActions'
 import Analysis from './components/Analysis'
 import Learn from './components/Learn'
 import { createUser, getUser } from './api'
-import { GoogleTranslate } from './components/Translate'
 import ImageUpload from './components/ImageUpload'
+import About from './pages/AboutPage'
+import ExpandedWeatherCard from './components/ExpandedWeatherCard'
+import MapComponent from './components/MapComponent'
 
 function App() {
   return <AppContent />
@@ -28,6 +30,7 @@ function AppContent() {
   const isOrchardRoute = location.pathname === '/orchard'
   const [activeTab, setActiveTab] = useState(null)
   const [userData, setUserData] = useState(null)
+  const [currentAnalysisSlide, setCurrentAnalysisSlide] = useState(0)
   const {
     isAuthenticated,
     isLoading,
@@ -62,6 +65,9 @@ function AppContent() {
     updateUser()
   }, [isAuthenticated, isLoading])
 
+  useEffect(() => {
+    console.log('User data:', userData)
+  }, [userData])
   const userInit = async (email) => {
     try {
       const userData = await getUser(email)
@@ -84,7 +90,6 @@ function AppContent() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/ownerPage' element={<ProfilePage />} />
-
           <Route
             path='farm-management'
             element={
@@ -94,8 +99,18 @@ function AppContent() {
               />
             }
           >
-            <Route path='analysis' element={<Analysis />} />
+            <Route
+              path='analysis'
+              element={
+                <Analysis
+                  currentAnalysisSlide={currentAnalysisSlide}
+                  setCurrentAnalysisSlide={setCurrentAnalysisSlide}
+                />
+              }
+            />
             <Route path='dashboard' element={<FarmCard />} />
+            <Route path='weather' element={<ExpandedWeatherCard />} />
+
             <Route path='learn' element={<Learn />} />
             <Route
               path='quick-actions'
@@ -103,16 +118,24 @@ function AppContent() {
                 <QuickActions
                   setActiveTab={setActiveTab}
                   activeTab={activeTab}
+                  setCurrentAnalysisSlide={setCurrentAnalysisSlide}
                 />
               }
             />
             <Route path='drone' element={<ConnectDrone />} />
             <Route path='image-upload' element={<ImageUpload />} />
+            <Route path='home' element={<MapComponent />} />
           </Route>
+          <Route path='/connect' element={<ConnectDrone />} />
           <Route path='/chatbot' element={<Chatbot />} />
           <Route path='/models-report' element={<ModelsReport />} />
-          <Route path='/connect' element={<ConnectDrone />} />
           <Route path='/orchard' element={<OrchardPage />} />
+          <Route
+            path='/profile'
+            element={<ProfilePage userData={userData} />}
+          />
+          <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<About />} />
         </Routes>
       </div>
     </>

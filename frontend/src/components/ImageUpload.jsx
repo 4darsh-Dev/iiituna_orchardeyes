@@ -91,7 +91,7 @@ const ImageUpload = ({ onImageUpload, maxSizeMB = 5 }) => {
       <div
         className={`relative border-2 border-dashed rounded-lg p-6 transition-colors
           ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'}
-          ${error ? 'border-red-500 bg-red-50' : ''}
+          ${error ? 'border-red-500 bg-red-50' : ''} h-[60vh] flex items-center justify-center
         `}
         onDrop={handleDrop}
         onDragOver={handleDragOver}

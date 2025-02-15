@@ -1,10 +1,6 @@
 import express from 'express'
 import { body, validationResult } from 'express-validator'
-import {
-  createUser,
-  editUser,
-  fetchUser
-} from '../controllers/userController.js'
+import { createUser, editUser, getUser } from '../controllers/userController.js'
 
 const router = express.Router()
 
@@ -14,5 +10,5 @@ router.post(
   createUser
 )
 router.post('/edit-user', editUser)
-router.get('/fetch-user', fetchUser)
+router.get('/get-user', getUser)
 export default router

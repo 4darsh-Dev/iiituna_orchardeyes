@@ -25,7 +25,7 @@ const Pulse = styled.div.withConfig({
 
 const VoiceInput = ({ onTranscript, onLanguageDetected }) => {
   const [isListening, setIsListening] = useState(false)
-  const [language, setLanguage] = useState('en-US')
+  const [language, setLanguage] = useState('hi-IN')
   const { transcript, browserSupportsSpeechRecognition, resetTranscript } =
     useSpeechRecognition()
   // const [text,setText] = useState('')

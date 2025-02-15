@@ -85,6 +85,13 @@ const Navbar = ({ background, isAuthenticated }) => {
         >
           Contact
         </NavLink>
+        <NavLink
+          onClick={() => {
+            navigate('/farm-management/dashboard')
+          }}
+        >
+          Dashboard
+        </NavLink>
         <Auth isAuthenticated={isAuthenticated} />
       </NavLinks>
     </nav>

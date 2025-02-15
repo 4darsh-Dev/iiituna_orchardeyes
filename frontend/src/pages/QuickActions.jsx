@@ -11,7 +11,7 @@ import Card from '../components/Card'
 // import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import droneIcon from '../assets/img/drone.png'
 import { useNavigate } from 'react-router-dom'
-const QuickActions = ({ activeTab, setActiveTab }) => {
+const QuickActions = ({ activeTab, setActiveTab, setCurrentAnalysisSlide }) => {
   const navigate = useNavigate()
   const actions = [
     {
@@ -40,14 +40,16 @@ const QuickActions = ({ activeTab, setActiveTab }) => {
       icon: <Sprout size={40} />,
       label: 'Yield',
       color: 'bg-green-100',
-      iconColor: 'text-green-600'
+      iconColor: 'text-green-600',
+      route: '/farm-management/analysis'
     },
     {
       icon: <Bug size={40} />,
       label: 'Disease Detection',
       color: 'bg-red-100',
       iconColor: 'text-red-600',
-      route: '/farm-management/image-upload'
+      route: '/farm-management/image-upload',
+      functions: setCurrentAnalysisSlide(2)
     },
     {
       icon: <Droplets size={40} />,
@@ -65,7 +67,8 @@ const QuickActions = ({ activeTab, setActiveTab }) => {
       icon: <Upload size={40} />,
       label: 'Soil Report Upload',
       color: 'bg-emerald-100',
-      iconColor: 'text-emerald-600'
+      iconColor: 'text-emerald-600',
+      route: '/farm-management/image-upload'
     },
     {
       icon: <PlusCircle size={40} />,
@@ -83,6 +86,7 @@ const QuickActions = ({ activeTab, setActiveTab }) => {
             key={index}
             onClick={() => {
               navigate(action.route)
+              action.functions
             }}
           >
             <Card
