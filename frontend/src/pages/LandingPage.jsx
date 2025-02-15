@@ -1,19 +1,21 @@
-import landingPageBackground from '../assets/img/landing-page-background.png'
+import LandingPageVideo from '../assets/LandingPage.mp4'
 import styled, { createGlobalStyle } from 'styled-components'
 import PreferedOrchs from '../components/PreferredOrchs'
 import FooterSection from '../components/FooterSection'
 import Chatbot from '../components/chatbot/Chatbot'
 import HomePage from './HomePage'
+
 const GlobalStyle = createGlobalStyle`
   * {
-    /* Add your global styles here */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-tertiary);
   }
 `
+
 const MainContainer = styled.main``
+
 const WelcomeContainer = styled.div`
   position: relative;
   display: flex;
@@ -22,13 +24,16 @@ const WelcomeContainer = styled.div`
   height: 500px;
   padding: 0 10vw;
 `
-const WelcomeImage = styled.img`
+
+const WelcomeVideoContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
+  overflow: hidden;
 
-  /* Add a dark overlay */
   &::after {
     content: '';
     position: absolute;
@@ -36,26 +41,35 @@ const WelcomeImage = styled.img`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
     z-index: 1;
   }
 `
+
+const WelcomeVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+
 const WelcomeText = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: white;
   width: 55vw;
+  z-index: 2;
 `
+
 const LandingPage = () => {
   return (
     <>
       <GlobalStyle />
-      <MainContainer className='hidden sm:block'>
+      <MainContainer className='hidden sm:block relative'>
         <WelcomeContainer>
-          <WelcomeImage src={landingPageBackground} />
-          <WelcomeText>
+          <WelcomeVideoContainer>
+            <WelcomeVideo src={LandingPageVideo} autoPlay loop muted />
+          </WelcomeVideoContainer>
+          <WelcomeText className='text-white flex items-start justify-center absolute top-1/2 max-w-[22rem] text-[5rem]'>
             <h1 className='text-3xl'>
               A <span className='text-highlight font-bold'>DRONE</span> POWERED
               SOLUTION FOR <span className='text-red-700'></span> ORCHARDS
