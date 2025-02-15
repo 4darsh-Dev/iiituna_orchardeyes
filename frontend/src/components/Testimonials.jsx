@@ -7,21 +7,21 @@ const testimonials = [
     role: 'Apple Orchard Owner, Himachal',
     quote:
       'OrchardEyes transformed the way I manage my farm. Early pest detection saved my crops!',
-    image: 'https://via.placeholder.com/80'
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRRwKCzhXs13ori_XV42obqcR0hp2xfA7pGQ&s'
   },
   {
     name: 'Amit Sharma',
     role: 'Farm Consultant',
     quote:
       'The AI-driven insights are game-changing. It makes precision farming a reality!',
-    image: 'https://via.placeholder.com/80'
+    image: 'https://khetibuddy.com/wp-content/uploads/2022/02/its-time-we-know-our-farmer.jpg'
   },
   {
     name: 'Neha Patel',
     role: 'Agritech Researcher',
     quote:
       'The drone mapping and real-time data sync make OrchardEyes an essential tool for modern farmers.',
-    image: 'https://via.placeholder.com/80'
+    image: 'https://iffco-public-assets.s3.ap-south-1.amazonaws.com/s3fs-public/2020-08/Initiatives%20for%20Farmers.jpg'
   }
 ]
 

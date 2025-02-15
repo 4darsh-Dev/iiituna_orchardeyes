@@ -6,7 +6,7 @@ import {
 } from 'react-icons/fa'
 
 import React from 'react'
-import HomeVideo from '../assets/droneVideo.mp4'
+import HomeVideo from '../assets/LandingPage.mp4'
 import imgDrone from '../assets/droneHome.png'
 import Hamburger from './Hamburger'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -41,7 +41,7 @@ const HeroSection = () => {
         {/* Content */}
         <div className='relative w-full h-3/4 flex flex-col items-center justify-center text-center  px-6 '>
           <h1 className='text-4xl md:text-6xl font-bold'>
-            OrchardEyes: Autonomous Drone System
+            OrchardEyes: AI Powered Drone System
           </h1>
           <p className='mt-4  text-lg md:text-xl max-w-2xl'>
             AI-powered drones mapping pest hotspots for healthier orchards.
