@@ -17,10 +17,8 @@ import QuickActions from './pages/QuickActions'
 import Analysis from './components/Analysis'
 import Learn from './components/Learn'
 import { createUser, getUser } from './api'
-import { GoogleTranslate } from './components/Translate'
 import ImageUpload from './components/ImageUpload'
 import About from './pages/AboutPage'
-import ContactUsPage from './pages/ContactUsPage'
 import ExpandedWeatherCard from './components/ExpandedWeatherCard'
 import MapComponent from './components/MapComponent'
 
@@ -92,7 +90,6 @@ function AppContent() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/ownerPage' element={<ProfilePage />} />
-
           <Route
             path='farm-management'
             element={
@@ -129,16 +126,16 @@ function AppContent() {
             <Route path='image-upload' element={<ImageUpload />} />
             <Route path='home' element={<MapComponent />} />
           </Route>
+          <Route path='/connect' element={<ConnectDrone />} />
           <Route path='/chatbot' element={<Chatbot />} />
           <Route path='/models-report' element={<ModelsReport />} />
-          <Route path='/connect' element={<ConnectDrone />} />
           <Route path='/orchard' element={<OrchardPage />} />
           <Route
             path='/profile'
             element={<ProfilePage userData={userData} />}
           />
           <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<ContactUsPage />} />
+          <Route path='/contact' element={<About />} />
         </Routes>
       </div>
     </>
