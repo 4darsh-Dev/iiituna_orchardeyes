@@ -47,7 +47,7 @@ def encode_image_to_base64(image_bytes):
 @token_required
 def predict_tree_parts(current_user):
     log_request_info(request)
-
+    print(request.files)
     if 'image' not in request.files:
         return jsonify({'message': 'No image provided'}), 400
 

@@ -1,40 +1,7 @@
-// const { FLASK_ENDPOINT } = process.env
-// export const partsClassification = async (req, res) => {
-//   try {
-//     console.log('req received')
-//     if (!req.file) {
-//       return res.status(400).send('No file uploaded')
-//     }
-//     const fileBuffer = await req.file.buffer
-//     console.log(fileBuffer)
-//     const jwt = await fetch(`${FLASK_ENDPOINT}/login`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ username: 'admin', password: 'admin' })
-//     })
-//     if (jwt) {
-//       console.log(jwt, 'jwt')
-//       const response = await fetch(`${FLASK_ENDPOINT}/tree-part-cls`, {
-//         method: 'POST',
-//         headers: {
-//           authorization: `Bearer ${jwt}`
-//         }
-//       })
-//       const data = await response.json()
-//       console.log(data)
-//       res.send(data).status(200)
-//     } else {
-//       res.send({ mssg: 'Some Error occured' }).status(500)
-//     }
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
 const { FLASK_ENDPOINT } = process.env;
 import FormData from 'form-data';
+import fetch from 'node-fetch'; 
 
 export const partsClassification = async (req, res) => {
   try {
@@ -42,8 +9,7 @@ export const partsClassification = async (req, res) => {
     if (!req.file) {
       return res.status(400).send('No file uploaded');
     }
-    const fileBuffer = await req.file.buffer
-    console.log(fileBuffer)
+
     // First get JWT token
     const loginResponse = await fetch(`${FLASK_ENDPOINT}/login`, {
       method: 'POST',
@@ -65,11 +31,13 @@ export const partsClassification = async (req, res) => {
       filename: req.file.originalname,
       contentType: req.file.mimetype
     });
+
     // Make request to Flask endpoint with token and image
     const response = await fetch(`${FLASK_ENDPOINT}/tree-part-cls`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${loginData.token}`
+        'Authorization': `Bearer ${loginData.token}`,
+        ...formData.getHeaders() // This is crucial for setting the correct Content-Type
       },
       body: formData
     });
