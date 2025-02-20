@@ -222,7 +222,7 @@ const Analysis = ({ currentAnalysisSlide, setCurrentAnalysisSlide }) => {
   return (
     <div className='flex bg-white sm:pl-48 flex-col gap-6 bg-[#dedede] min-h-screen items-center'>
       {farmMetrics ? (
-        <div className='relative w-screen p-4'>
+        <div className='relative w-screen sm:w-[70vw] p-4'>
           <div className='flex justify-between items-center mb-6'>
             <button
               onClick={() => handleSlideChange('prev')}

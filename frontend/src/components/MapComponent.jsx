@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, useMap, Polygon } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
 import { Search, Filter, Bug } from 'lucide-react'
 import 'leaflet/dist/leaflet.css'
@@ -125,7 +125,7 @@ const getOutbreakIcon = (type, severity) => {
 const MapComponent = () => {
   const [theme, setTheme] = useState('light')
   const [filters, setFilters] = useState({})
-  const center = [51.505, -0.09]
+  const center = [35.6895, 139.6917]
   const zoom = 13
 
   const handleSearch = async (query) => {
@@ -154,6 +154,12 @@ const MapComponent = () => {
       ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
 
+  const farmBoundary = [
+    [35.6895, 139.6917], // Example coordinates
+    [35.6896, 139.6927],
+    [35.6885, 139.692],
+    [35.6895, 139.6917] // Closing the polygon
+  ]
   return (
     <div className='relative h-[calc(100vh-4rem)] w-screen'>
       {/* <MapControls
@@ -164,6 +170,15 @@ const MapComponent = () => {
       {/* <Legend /> */}
       <MapContainer center={center} zoom={zoom} className='h-full w-full'>
         <TileLayer url={tileLayerUrl} />
+
+        <Polygon
+          positions={farmBoundary}
+          pathOptions={{
+            fillColor: 'white',
+            color: 'blue', // Border color
+            fillOpacity: 0.3 // Translucent
+          }}
+        />
         <MarkerClusterGroup>
           {filteredOutbreaks.map((outbreak) => (
             <Marker

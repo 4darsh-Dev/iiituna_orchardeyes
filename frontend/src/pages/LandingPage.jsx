@@ -4,7 +4,15 @@ import PreferedOrchs from '../components/PreferredOrchs'
 import FooterSection from '../components/FooterSection'
 import Chatbot from '../components/chatbot/Chatbot'
 import HomePage from './HomePage'
-import { Bird, Leaf, ChevronDown } from "lucide-react"
+import {
+  Bird,
+  Leaf,
+  ChevronDown,
+  MessageCircle,
+  Bot,
+  Compass
+} from 'lucide-react'
+import { FaRobot } from 'react-icons/fa'
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -66,94 +74,107 @@ const LandingPage = () => {
     <>
       <GlobalStyle />
       <MainContainer className='hidden sm:block relative'>
-      <main className="relative min-h-screen">
-        {/* Hero Section with Video */}
-        <div className="relative h-[600px] flex items-center">
-          {/* Video Container */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
-            <video 
-              className="w-full h-full object-cover"
-              autoPlay 
-              loop 
-              muted 
-              src={LandingPageVideo}
-            />
-          </div>
+        <main className='relative min-h-screen'>
+          {/* Hero Section with Video */}
+          <div className='relative h-[600px] flex items-center'>
+            {/* Video Container */}
+            <div className='absolute inset-0 z-0 overflow-hidden'>
+              <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10' />
+              <video
+                className='w-full h-full object-cover'
+                autoPlay
+                loop
+                muted
+                src={LandingPageVideo}
+              />
+            </div>
 
-          {/* Hero Content */}
-          <div className="container mx-auto px-6 z-20">
-            <div className="max-w-2xl">
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-                A <span className="text-green-500">DRONE</span> POWERED
-                <br />
-                SOLUTION FOR
-                <span className="text-amber-500"> ORCHARDS</span>
-              </h1>
-              <p className="text-lg text-gray-200 mb-8">
-                Revolutionizing orchard management with cutting-edge drone technology
-              </p>
-              <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg 
-                               flex items-center gap-2 transition-all transform hover:scale-105">
-                <Bird className="w-5 h-5" />
-                Explore Solutions
-              </button>
+            {/* Hero Content */}
+            <div className='container mx-auto px-6 z-20'>
+              <div className='max-w-2xl'>
+                <h1 className='text-5xl md:text-7xl font-bold text-white mb-6'>
+                  A <span className='text-green-500'>DRONE</span> POWERED
+                  <br />
+                  SOLUTION FOR
+                  <span className='text-amber-500'> ORCHARDS</span>
+                </h1>
+                <p className='text-lg text-gray-200 mb-8'>
+                  Revolutionizing orchard management with cutting-edge drone
+                  technology
+                </p>
+                <button
+                  className='bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg 
+                               flex items-center gap-2 transition-all transform hover:scale-105'
+                >
+                  <Compass className='w-5 h-5' />
+                  Explore Solutions
+                </button>
+              </div>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className='absolute bottom-8 left-1/2 -translate-x-1/2 text-white animate-bounce'>
+              <ChevronDown className='w-8 h-8' />
             </div>
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white animate-bounce">
-            <ChevronDown className="w-8 h-8" />
-          </div>
-        </div>
-
-        {/* Features Grid */}
-          <div className="bg-white py-20">
-            <div className="container mx-auto px-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Features Grid */}
+          <div className='bg-white py-20'>
+            <div className='container mx-auto px-6'>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
                 {[
-            {
-              icon: <Bird className="w-8 h-8" />,
-              title: "Precision Monitoring",
-              description: "Real-time drone surveillance for comprehensive orchard management"
-            },
-            {
-              icon: <Leaf className="w-8 h-8" />,
-              title: "Crop Health Analysis",
-              description: "Advanced AI-powered detection of plant health and stress factors"
-            },
-            {
-              icon: <Bird className="w-8 h-8" />,
-              title: "Smart Irrigation",
-              description: "Optimized water management through drone-captured data"
-            }
+                  {
+                    icon: <Bird className='w-8 h-8' />,
+                    title: 'Precision Monitoring',
+                    description:
+                      'Real-time drone surveillance for comprehensive orchard management'
+                  },
+                  {
+                    icon: <Leaf className='w-8 h-8' />,
+                    title: 'Apple Health Analysis',
+                    description:
+                      'Advanced AI-powered detection of plant health and stress factors'
+                  },
+                  {
+                    icon: <Bot className='w-8 h-8' />,
+                    title: 'Personalised Insights',
+                    description:
+                      'Personalized recommendations based on orchard data and analysis'
+                  }
                 ].map((feature, index) => (
-            <div key={index} className="bg-gray-800 p-6 rounded-xl shadow-lg hover:bg-gray-700 
-                   transition-all transform hover:-translate-y-1">
-              <div className="text-green-500 mb-4">{feature.icon}</div>
-              <h3 className="text-white text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-300">{feature.description}</p>
-            </div>
+                  <div
+                    key={index}
+                    className='p-6 rounded-xl shadow-lg
+                   transition-all transform hover:-translate-y-1'
+                  >
+                    <div className='text-green-500 mb-4'>{feature.icon}</div>
+                    <h3 className=' text-xl font-semibold mb-2'>
+                      {feature.title}
+                    </h3>
+                    <p className='text-gray-600'>{feature.description}</p>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
 
           {/* Test User Details Card */}
-        <div className="fixed right-5 top-[20vh] bg-white/10 text-black backdrop-blur-md p-4 rounded-lg 
-                       border border-white/20">
-          <h3 className="font-bold mb-2">Test User Details</h3>
-          <div className="space-y-1 text-sm font-bold">
-            <p>Email - test@gmail.com</p>
-            <p>Password - test@123</p>
+          <div
+            className='fixed right-5 top-[20vh] bg-white/10 text-black backdrop-blur-md p-4 rounded-lg 
+                       border border-white/20'
+          >
+            <h3 className='font-bold mb-2'>Test User Details</h3>
+            <div className='space-y-1 text-sm font-bold'>
+              <p>Email - test@gmail.com</p>
+              <p>Password - test@123</p>
+            </div>
           </div>
-        </div>
 
-        {/* Original Components */}
-        {/* <Chatbot />
+          {/* Original Components */}
+          {/* <Chatbot />
         <PreferedOrchs />
         <FooterSection /> */}
-      </main>
+        </main>
         <Chatbot />
         <PreferedOrchs />
         <FooterSection />
@@ -164,5 +185,3 @@ const LandingPage = () => {
 }
 
 export default LandingPage
-
-
