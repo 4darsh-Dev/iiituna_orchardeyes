@@ -16,7 +16,8 @@ app.use(
     origin: [
       'http://localhost:5173',
       'http://192.168.110.180:5173',
-      'http://192.168.3.117:5173'
+      'http://192.168.3.117:5173',
+      'https://iiituna-orchardeyes.vercel.app'
     ]
   })
 )
